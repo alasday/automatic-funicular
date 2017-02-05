@@ -15,12 +15,14 @@ studentData = csv.DictReader(students)
 courses = open('courses.csv')
 courseData = csv.DictReader(courses)
 
+studentData.next()
 for peep in studentData:
     entry = {}
     entry['name'] = peep['name']
     entry['id'] = peep['id']
     entry['age'] = peep['age']
     
+    courseData.next()
     for course in courseData:
         if (entry['id'] == course['id']):
                 entry[course['code']] = course['mark']
