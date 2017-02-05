@@ -24,6 +24,7 @@ for peep in studentData:
     for course in courseData:
         if (entry['id'] == course['id']):
                 entry[course['code']] = course['mark']
+    courses.seek(0)
             
     ourDB.collection1.insert_one(entry)
     
