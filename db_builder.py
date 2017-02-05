@@ -7,7 +7,7 @@ from pymongo import MongoClient
 import csv
 
 
-server = MongoClient('lisa.stuy.edu', 27017)
+server = MongoClient('lisa.stuy.edu')
 ourDB = server.automatic_funicular
 
 students = open('peeps.csv')
@@ -25,7 +25,7 @@ for peep in studentData:
         if (entry['id'] == course['id']):
                 entry[course['code']] = course['mark']
             
-    ourDB.col1.insert_one(entry)
+    ourDB.collection1.insert_one(entry)
     
 students.close()
 courses.close()
