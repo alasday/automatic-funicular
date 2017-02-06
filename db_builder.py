@@ -28,7 +28,7 @@ for peep in studentData:
                 entry[course['code']] = course['mark']
     courses.seek(0)
             
-    ourDB.collection1.insert_one(entry)
+    ourDB.students.insert_one(entry)
     
 students.close()
 courses.close()
