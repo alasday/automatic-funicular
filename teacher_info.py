@@ -12,5 +12,21 @@ import csv
 fd = open('teachers.csv')
 d = csv.DictReader(fd)
 
-for teacher in d:
-    print 'hello'
+def addStudents(code):
+    studentList = []
+    cursor = ourDB.students.find()
+    for student in cursor:
+        courseList = student['courses']
+        for course in courseList:
+            if 
+    return studentList
+
+def genTeacherColl():
+    for teacher in d:
+        entry = {} # one teacher doc
+        entry['teacher'] = teacher['teacher']
+        entry['period'] = teacher['period']
+        entry['code'] = teacher['code']
+        entry['students'] = addStudents(entry['code'])
+        ourDB.teachers.insert_one(entry)
+    
