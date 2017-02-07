@@ -6,28 +6,24 @@
 from pymongo import MongoClient
 import csv
 
-
 server = MongoClient('lisa.stuy.edu')
-ourDB = server.automatic_funicular
+ourDB = server['automatic_funicular']
 
 students = open('peeps.csv')
-studentData = csv.DictReader(students)
+studentDict = csv.DictReader(students)
 courses = open('courses.csv')
-courseData = csv.DictReader(courses)
+courseDict = csv.DictReader(courses)
 
-studentData.next()
-for peep in studentData:
+for peep in studentDict:
     entry = {}
     entry['name'] = peep['name']
     entry['id'] = peep['id']
-    entry['age'] = peep['age']
-    
-    courseData.next()
-    for course in courseData:
+    entry['age'] = int(peep['age'])
+    entry['courses'] = []
+    for course in courseDict:
         if (entry['id'] == course['id']):
-                entry[course['code']] = course['mark']
+            entry['courses'].append({'code': course['code'], 'mark': int(course['mark'])})
     courses.seek(0)
-            
     ourDB.students.insert_one(entry)
     
 students.close()
